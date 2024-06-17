@@ -109,19 +109,22 @@ RUN rosdep update
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
     apt-get update -q && \
     apt-get install -y \
-    ros-${ROS_DISTRO}-gazebo-ros-pkgs \
+    ros-${ROS_DISTRO}-gazebo-* \
     ros-${ROS_DISTRO}-ros-ign \
     ros-${ROS_DISTRO}-navigation2 \
-    ros-${ROS_DISTRO}-nav2-bringup && \
+    ros-${ROS_DISTRO}-nav2-bringup \
+    ros-${ROS_DISTRO}-turtlebot3-msgs \ 
+    ros-${ROS_DISTRO}-turtlebot3 && \
     rm -rf /var/lib/apt/lists/*; \
     fi
-
  
 
 # Enable apt-get completion after running `apt-get update` in the container
 RUN rm /etc/apt/apt.conf.d/docker-clean
 
 COPY ./entrypoint.sh /
+COPY ./ros2build.sh /
+
 RUN dos2unix /entrypoint.sh
 ENTRYPOINT [ "/bin/bash", "-c", "/entrypoint.sh" ]
 

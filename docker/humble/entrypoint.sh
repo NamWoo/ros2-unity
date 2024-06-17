@@ -349,20 +349,5 @@ VNC_PASSWORD=
 #echo -e 'See \e]8;;https://github.com/Tiryoh/docker-ros2-desktop-vnc/issue/131\e\\https://github.com/Tiryoh/docker-ros2-desktop-vnc/issue/131\e]8;;\e\\'
 #echo "============================================================================================"
 
+cp /ros2build.sh $HOME/Desktop/ros2build.sh
 exec /bin/tini -- supervisord -n -c /etc/supervisor/supervisord.conf
-
-
-
-workingspace=colcon_ws
-
-mkdir -p ~/${workingspace}/src
-git clone -b main-ros2 https://github.com/Unity-Technologies/ROS-TCP-Endpoint
-cd ~/${workingspace} colcon build --symlink-install --packages-select ros_tcp_endpoint
-
-source ~/${workingspace}/install/setup.bash
-
-mkdir -p ~/${workingspace}/src
-git clone https://github.com/namwoo/unity_slam_example
-cd ~/${workingspace} colcon build --symlink-install --packages-select unity_slam_example
-
-source ~/${workingspace}/install/setup.bash
