@@ -1,28 +1,29 @@
-# ros2-unity
+# ros2-humble
 
-Unity 관련 ROS 소스가 임포트 되어있는 ROS2 Humble
+* Unity 관련 ROS 소스가 임포트 되어있는 ROS2 Humble
+* windows 또는 Ubuntu 환경이서 Docker 를 활용하여, 웹브라우져에서 사용할 수 있는 Docker 환경
 
 
 ## 기본순서
 
-1. docker 로그인/빌드, Win/Ubuntu 확인완료
-2. docker 실행해 놓고 사용하던 웹브라우저에서 VNC로 접속
-3. VNC안에서 ROS 사용
-
+* (Prerequisites) docker install and login
+1. docker build Win/Ubuntu 확인완료
+2. docker run해 놓고 사용하던 웹브라우저에서 VNC로 docker 접속
+3. VNC안에서 ROS2 사용
 
 
 ## docker build
 ```bash
 # build
 
-cd ros2-unity/docker/humble && docker build -t ros2-unity:0.0.1 .
+cd ros2-unity/docker/humble && docker build -t ros2-humble:0.0.1 .
 
 ```
 
 ## docker run
 
 ```bash
-docker run -p 6080:80 -p 10000:10000 --security-opt seccomp=unconfined --shm-size=1024m ros2-unity:0.0.1
+docker run -p 6080:80 -p 10000:10000 --security-opt seccomp=unconfined --shm-size=1024m ros2-humble:0.0.1
 
 ```
 
@@ -32,7 +33,7 @@ docker run -p 6080:80 -p 10000:10000 --security-opt seccomp=unconfined --shm-siz
 
 
 ```bash
-#web browser
+#web browser (ex Chrome)
 http://127.0.0.1:6080/
 
 ```
@@ -42,13 +43,13 @@ http://127.0.0.1:6080/
 
 ![20240725-003335](https://github.com/user-attachments/assets/e889dd6b-8c69-4fdd-ac6d-6311632e8e6b)
 
-
+* ROS2 Sample Test
 ```bash
 #terminator #1
 ros2 run demo_nodes_py talker
 
 #terminator #2
-ros2 run demo_nodes_py talker
+ros2 run demo_nodes_py listener
 
 ```
 
